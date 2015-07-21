@@ -9,7 +9,7 @@ typedef struct Node {
     char *key;
     method val;
 
-    Node *left, *right;
+    struct Node *left, *right;
     char color;
 
 } Node;
