@@ -101,6 +101,14 @@ void put(Node **h, const char *const key, const method val) {
     *h = root;
 }
 
+void destroyTree(Node *h) {
+    if (NULL == h) return;
+    destroyTree(h->left);
+    destroyTree(h->right);
+    free(h->key);
+    free(h);
+}
+
 // Print ordered keys
 void testPrintKeys(const Node *const n) {
     if (NULL == n) return;
@@ -143,6 +151,8 @@ int main() {
 
     put(&root, "Test1A", &testFuncC);
     (*get(root, "Test1A"))(testMessage);
+
+    destroyTree(root);
 
     return 0;
 }
