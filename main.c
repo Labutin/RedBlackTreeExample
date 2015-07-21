@@ -66,6 +66,7 @@ void flipColor(Node *const h) {
 
 Node *_put(Node *h, char const *const key, const method val) {
     if (NULL == h) {
+        // Create new Node
         Node *node = (Node *) malloc(sizeof(Node));
         node->left = node->right = NULL;
         node->key = (char *) malloc(strlen(key) + 1);
@@ -85,6 +86,7 @@ Node *_put(Node *h, char const *const key, const method val) {
         h->val = val;
     }
 
+    // Fix tree structure
     if (isRed(h->right) && !isRed(h->left)) h = rotateLeft(h);
     if (isRed(h->left) && isRed(h->left->left)) h = rotateRight(h);
     if (isRed(h->left) && isRed(h->right)) flipColor(h);
@@ -98,13 +100,17 @@ void put(Node **h, char const *const key, const method val) {
     *h = root;
 }
 
+// Print ordered keys
 void testPrintKeys(const Node *const n) {
     if (NULL == n) return;
     testPrintKeys(n->left);
-    printf("%s\n", n->key);
+    printf("%s", n->key);
     testPrintKeys(n->right);
 }
 
+
+// Just test Functions
+// ------------------------------------------
 void *testFuncA(void *s) {
     printf("A -> %s\n", (char *) s);
     return s;
@@ -119,8 +125,10 @@ void *testFuncC(void *s) {
     printf("C -> %s\n", (char *) s);
     return s;
 }
+// ------------------------------------------
 
 int main() {
+    // Test our realisation RedBlack tree
     Node *root = NULL;
     char *testMessage = "Test Message";
 
