@@ -1,3 +1,5 @@
+// It is a plain C code (not C++)
+
 #include <stddef.h>
 #include <string.h>
 #include <stdlib.h>
@@ -101,12 +103,13 @@ void put(Node **h, const char *const key, const method val) {
     *h = root;
 }
 
-void destroyTree(Node *h) {
-    if (NULL == h) return;
-    destroyTree(h->left);
-    destroyTree(h->right);
-    free(h->key);
-    free(h);
+void destroyTree(Node **h) {
+    if (NULL == *h) return;
+    destroyTree(&(*h)->left);
+    destroyTree(&(*h)->right);
+    free((*h)->key);
+    free(*h);
+    *h = NULL;
 }
 
 // Print ordered keys
@@ -152,7 +155,7 @@ int main() {
     put(&root, "Test1A", &testFuncC);
     (*get(root, "Test1A"))(testMessage);
 
-    destroyTree(root);
+    destroyTree(&root);
 
     return 0;
 }
