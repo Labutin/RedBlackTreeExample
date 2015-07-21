@@ -23,7 +23,8 @@ int isEmpty(const Node *const n) {
     return NULL == n;
 }
 
-method get(const Node *const root, char const *const key) {
+// Get function pointer by key
+method get(const Node *const root, const char *const key) {
     const Node *n = root;
     while (NULL != n) {
         int cmp = strcmp(key, n->key);
@@ -64,7 +65,7 @@ void flipColor(Node *const h) {
     h->right->color = 'R' == h->right->color ? 'B' : 'R';
 }
 
-Node *_put(Node *h, char const *const key, const method val) {
+Node *_put(Node *h, const char *const key, const method val) {
     if (NULL == h) {
         // Create new Node
         Node *node = (Node *) malloc(sizeof(Node));
@@ -94,7 +95,7 @@ Node *_put(Node *h, char const *const key, const method val) {
     return h;
 }
 
-void put(Node **h, char const *const key, const method val) {
+void put(Node **h, const char *const key, const method val) {
     Node *root = _put(*h, key, val);
     root->color = 'B';
     *h = root;
